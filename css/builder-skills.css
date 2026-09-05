@@ -1,0 +1,660 @@
+/* =========================================================
+   BUILDER PAGE 2 - SKILLS
+   ========================================================= */
+
+
+/* =========================================================
+   GENERAL PAGE
+   ========================================================= */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    min-height: 100%;
+
+    background: #222;
+
+    font-family: serif;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   RESPONSIVE WRAPPER
+   =========================================================
+
+   The artwork is designed at 2048 × 1325.
+
+   JavaScript scales the entire internal sheet as one unit,
+   so all of the absolute coordinates below remain based on
+   the original image.
+   ========================================================= */
+
+.sheet-wrapper {
+    position: relative;
+
+    width: 2048px;
+
+    margin: 0 auto;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   BUILDER SHEET
+   ========================================================= */
+
+.builder-sheet {
+    position: relative;
+
+    width: 2048px;
+    height: 1325px;
+
+    margin: 0;
+
+    transform-origin: top left;
+}
+
+
+/* =========================================================
+   BACKGROUND IMAGE
+   ========================================================= */
+
+.sheet-background {
+    display: block;
+
+    width: 2048px;
+    height: 1325px;
+
+    max-width: none;
+
+    user-select: none;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   GENERAL BUTTON RESET
+   ========================================================= */
+
+.builder-sheet button {
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    outline: none;
+
+    font-family: serif;
+
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+
+/* =========================================================
+   TOGGLE BOXES
+   ========================================================= */
+
+.toggle-choice {
+    position: absolute;
+
+    width: 46px;
+    height: 46px;
+
+    background: transparent;
+
+    border-radius: 11px;
+
+    cursor: pointer;
+
+    z-index: 10;
+}
+
+
+.toggle-choice:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+
+/*
+   Normal skills and modifications use red fill.
+*/
+
+.toggle-choice.selected {
+    background: rgba(190, 0, 0, 0.82);
+}
+
+
+/* =========================================================
+   RANKED BOXES
+   ========================================================= */
+
+.ranked-choice {
+    position: absolute;
+
+    width: 46px;
+    height: 46px;
+
+    background: transparent;
+    color: white;
+
+    border-radius: 11px;
+
+    font-size: 44px;
+    font-weight: regular;
+    line-height: 48px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    user-select: none;
+}
+
+
+.ranked-choice:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+
+.ranked-choice.has-rank {
+    background: rgba(190, 0, 0, 0.82);
+}
+
+
+/* =========================================================
+   ATTRIBUTE POSITIONS
+   ========================================================= */
+
+#awareChoice {
+    left: 38px;
+    top: 381px;
+}
+
+
+#flexibleChoice {
+    left: 38px;
+    top: 443px;
+}
+
+
+#resilientChoice {
+    left: 38px;
+    top: 503px;
+}
+
+
+#sneakyChoice {
+    left: 38px;
+    top: 566px;
+}
+
+
+#strongChoice {
+    left: 38px;
+    top: 628px;
+}
+
+
+#tirelessChoice {
+    left: 38px;
+    top: 691px;
+}
+
+
+#toughChoice {
+    left: 38px;
+    top: 753px;
+}
+
+
+/* =========================================================
+   GENERAL POSITIONS
+   ========================================================= */
+
+#abrazareChoice {
+    left: 465px;
+    top: 101px;
+}
+
+
+#disarmChoice {
+    left: 465px;
+    top: 163px;
+}
+
+
+#dualWieldingChoice {
+    left: 465px;
+    top: 225px;
+}
+
+
+#executionerChoice {
+    left: 465px;
+    top: 287px;
+}
+
+
+#feintChoice {
+    left: 465px;
+    top: 349px;
+}
+
+
+#gambitChoice {
+    left: 465px;
+    top: 411px;
+}
+
+
+#lungeChoice {
+    left: 465px;
+    top: 474px;
+}
+
+
+#opportunistChoice {
+    left: 465px;
+    top: 536px;
+}
+
+
+#pickpocketChoice {
+    left: 465px;
+    top: 598px;
+}
+
+
+#rabatChoice {
+    left: 466px;
+    top: 663px;
+}
+
+
+#sweepChoice {
+    left: 466px;
+    top: 726px;
+}
+
+
+#unarmoredChoice {
+    left: 466px;
+    top: 787px;
+}
+
+
+#yankChoice {
+    left: 466px;
+    top: 849px;
+}
+
+
+/* =========================================================
+   SHIELD SKILL POSITIONS
+   ========================================================= */
+
+#holdTheLineChoice {
+    left: 465px;
+    top: 988px;
+}
+
+
+#shieldBashChoice {
+    left: 465px;
+    top: 1050px;
+}
+
+
+#swashbucklingChoice {
+    left: 465px;
+    top: 1111px;
+}
+
+
+/* =========================================================
+   SWORD SKILL POSITIONS
+   ========================================================= */
+
+#assassinChoice {
+    left: 1040px;
+    top: 101px;
+}
+
+
+#halfSwordingChoice {
+    left: 1040px;
+    top: 163px;
+}
+
+
+#mordschlagChoice {
+    left: 1040px;
+    top: 225px;
+}
+
+
+#moulinetChoice {
+    left: 1040px;
+    top: 288px;
+}
+
+
+#riposteChoice {
+    left: 1040px;
+    top: 349px;
+}
+
+
+#swordAndBoardChoice {
+    left: 1040px;
+    top: 411px;
+}
+
+
+/* =========================================================
+   AXE SKILL POSITIONS
+   ========================================================= */
+
+#grapplingHookChoice {
+    left: 1040px;
+    top: 550px;
+}
+
+
+#haftHackChoice {
+    left: 1040px;
+    top: 612px;
+}
+
+
+#weaponHookChoice {
+    left: 1040px;
+    top: 674px;
+}
+
+
+/* =========================================================
+   POLEARM SKILL POSITIONS
+   ========================================================= */
+
+#haftBlockChoice {
+    left: 1038px;
+    top: 813px;
+}
+
+
+#haftStrikeChoice {
+    left: 1038px;
+    top: 875px;
+}
+
+
+/* =========================================================
+   FLAIL SKILL POSITIONS
+   ========================================================= */
+
+#ensnareChoice {
+    left: 1038px;
+    top: 1017px;
+}
+
+
+/* =========================================================
+   MODIFICATION POSITIONS
+   ========================================================= */
+
+#centerGripChoice {
+    left: 1579px;
+    top: 101px;
+}
+
+
+#cushionedChoice {
+    left: 1579px;
+    top: 163px;
+}
+
+
+#flangedChoice {
+    left: 1579px;
+    top: 225px;
+}
+
+
+#gigueStrapChoice {
+    left: 1579px;
+    top: 286px;
+}
+
+
+#reinforcedChoice {
+    left: 1579px;
+    top: 349px;
+}
+
+
+#spikedChoice {
+    left: 1579px;
+    top: 411px;
+}
+
+
+#topSpikeChoice {
+    left: 1579px;
+    top: 473px;
+}
+
+
+/* =========================================================
+   INVALID SELECTION FEEDBACK
+   ========================================================= */
+
+@keyframes rejected-choice {
+    0%   { background: rgba(255, 0, 0, 0.70); }
+    100% { background: transparent; }
+}
+
+
+.choice-rejected {
+    animation: rejected-choice 0.35s ease;
+}
+
+/* =========================================================
+   UNAFFORDABLE CHOICES
+   ========================================================= */
+
+.toggle-choice.unaffordable,
+.ranked-choice.unaffordable {
+    background: rgba(0, 0, 0, 0.58) !important;
+
+    cursor: default !important;
+
+    pointer-events: auto;
+}
+
+
+/* Prevent normal hover styling from showing through. */
+
+.toggle-choice.unaffordable:hover,
+.ranked-choice.unaffordable:hover {
+    background: rgba(0, 0, 0, 0.58) !important;
+}
+
+/* =========================================================
+   POINT COUNTER
+   ========================================================= */
+
+#pointsCounter {
+    position: absolute;
+
+    left: 112px;
+    top: 84px;
+
+    width: 225px;
+    height: 180px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+    color: white;
+
+    font-family: serif;
+    font-size: 116px;
+    font-weight: regular;
+    line-height: 1;
+
+    text-align: center;
+
+    z-index: 20;
+
+    user-select: none;
+}
+
+/* =========================================================
+   POINT COUNTER
+   ========================================================= */
+
+#pointsCounter {
+    position: absolute;
+
+    left: 112px;
+    top: 84px;
+
+    width: 225px;
+    height: 180px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+    padding: 0;
+
+    background: transparent;
+    color: white;
+
+    border: none;
+    outline: none;
+
+    font-family: serif;
+    font-size: 116px;
+    font-weight: regular;
+    line-height: 1;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    z-index: 20;
+
+    user-select: none;
+
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+
+#pointsCounter:hover {
+    background: rgba(
+        255,
+        255,
+        255,
+        0.05
+    );
+}
+
+/* =========================================================
+   SHEET NAVIGATION
+   ========================================================= */
+
+.sheet-nav-button {
+    position: absolute;
+
+    width: 42px;
+    height: 42px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    font-family: serif;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    z-index: 1000;
+}
+
+
+/* ---------------------------------------------------------
+   PREVIOUS SHEET
+   --------------------------------------------------------- */
+
+.previous-sheet-button {
+    left: 2px;
+    top: 2px;
+
+    background: rgba(0, 0, 0, 0.72);
+}
+
+.previous-sheet-button:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+
+/* ---------------------------------------------------------
+   MAIN / BUILDER SWITCH
+   --------------------------------------------------------- */
+
+.mode-nav-button {
+    left: 50%;
+    top: 2px;
+
+    transform: translateX(-50%);
+
+    background: rgba(190, 0, 0, 0.90);
+}
+
+.mode-nav-button:hover {
+    background: rgba(225, 0, 0, 0.95);
+}
+
+
+/* ---------------------------------------------------------
+   NEXT SHEET
+   --------------------------------------------------------- */
+
+.next-sheet-button {
+    right: 2px;
+    top: 2px;
+
+    background: rgba(0, 0, 0, 0.72);
+}
+
+.next-sheet-button:hover {
+    background: rgba(255, 255, 255, 0.18);
+}

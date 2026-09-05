@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Character Sheet</title>
+
+    <link
+        rel="stylesheet"
+        href="css/main-sheet.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         RESPONSIVE SHEET WRAPPER
+         ===================================================== -->
+
+    <div class="sheet-wrapper">
+
+
+        <!-- =================================================
+             CHARACTER SHEET
+             ================================================= -->
+
+        <div class="character-sheet">
+
+            <!-- =============================================
+     SHEET NAVIGATION
+     ============================================= -->
+
+<a
+    href="gear-sheet.html"
+    class="sheet-nav-button previous-sheet-button"
+    aria-label="Go to Gear Sheet"
+    title="Gear Sheet"
+>
+    ←
+</a>
+
+<a
+    href="builder-gear.html"
+    class="sheet-nav-button mode-nav-button"
+    aria-label="Go to Character Builder"
+    title="Character Builder"
+>
+    B
+</a>
+
+<a
+    href="gear-sheet.html"
+    class="sheet-nav-button next-sheet-button"
+    aria-label="Go to Gear Sheet"
+    title="Gear Sheet"
+>
+    →
+</a>
+
+            <!-- =============================================
+                 CHARACTER SHEET BACKGROUND
+                 ============================================= -->
+
+            <img
+                src="images/character-sheet.png"
+                alt="Character Sheet"
+            >
+
+
+            <!-- =============================================
+                 NAME
+                 ============================================= -->
+
+            <input
+                type="text"
+                id="name"
+            >
+
+
+            <!-- =============================================
+                 PHYSIQUE
+                 ============================================= -->
+
+            <input
+                type="text"
+                id="physique"
+                readonly
+                tabindex="-1"
+            >
+
+
+            <!-- =============================================
+                 HEIGHT
+                 ============================================= -->
+
+            <input
+                type="text"
+                id="height"
+                readonly
+                tabindex="-1"
+            >
+
+
+            <!-- =============================================
+                 PHYSIQUE-BASED VALUES
+                 ============================================= -->
+
+            <input
+                type="text"
+                id="stealth"
+                readonly
+            >
+
+            <input
+                type="text"
+                id="mobility"
+                readonly
+            >
+
+            <input
+                type="text"
+                id="endurance"
+                readonly
+            >
+
+            <input
+                type="text"
+                id="recovery"
+                readonly
+            >
+
+        <div id="fatigueControl" class="fatigue-control">
+
+            <button
+                type="button"
+                id="fatigueMinus"
+                class="fatigue-button"
+            >
+                −
+            </button>
+
+            <span id="fatigue">0</span>
+
+            <button
+                type="button"
+                id="fatiguePlus"
+                class="fatigue-button"
+             >
+                +
+            </button>
+
+        </div>
+
+            <input
+                type="text"
+                id="fatigueModifier"
+                readonly
+                tabindex="-1"
+            >
+
+            <input
+                type="text"
+                id="fortitude"
+                readonly
+            >
+
+
+            <!-- =============================================
+                 MIGHT / PADDING
+                 ============================================= -->
+
+            <input
+                type="text"
+                id="might"
+                readonly
+            >
+
+            <input
+                type="text"
+                id="padding"
+                readonly
+            >
+
+
+            <!-- =============================================
+                 HEIGHT / GRAPPLING VALUES
+                 ============================================= -->
+
+            <input
+                type="text"
+                id="reach"
+                readonly
+            >
+
+            <input
+                type="text"
+                id="grappling"
+                readonly
+            >
+
+
+            <!-- =============================================
+                 WEIGHT / MOVEMENT / PRIORITY
+                 ============================================= -->
+
+            <input
+                type="text"
+                id="weight"
+                readonly
+                tabindex="-1"
+            >
+
+            <input
+                type="text"
+                id="weightBase"
+                readonly
+            >
+
+            <input
+                type="text"
+                id="weightEIndicator"
+                readonly
+            >
+
+            <input
+                type="text"
+                id="movement"
+                readonly
+            >
+
+            <input
+                type="text"
+                id="priority"
+            >
+
+
+            <!-- =============================================
+                 INJURY PENALTY INDICATORS
+                 ============================================= -->
+
+
+            <input
+                type="text"
+                id="priorityPenalty"
+                readonly
+            >
+
+
+            <!-- =============================================
+                 SKILLS
+                 ============================================= -->
+
+            <div
+            id="skills"
+            aria-label="Selected skills"
+            ></div>
+
+
+            <!-- =============================================
+                 INJURY SYSTEM
+                 ============================================= -->
+
+            <div id="injuryField">
+
+
+                <!-- =========================================
+                     ACTIVE INJURY TOKENS
+                     ========================================= -->
+
+                <div id="injuryTokens"></div>
+
+
+                <!-- =========================================
+                     ADD INJURY
+                     ========================================= -->
+
+                <select id="injurySelect">
+
+
+                    <option value="">
+                        +
+                    </option>
+
+
+                    <!-- =====================================
+                         GENERAL
+                         ===================================== -->
+
+                    <option value="bleeding">
+                        Bleeding
+                    </option>
+
+                    <option value="bruise">
+                        Bruise
+                    </option>
+
+
+                    <!-- =====================================
+                         HEAD
+                         ===================================== -->
+
+                    <option value="head-injury">
+                        Head Injury
+                    </option>
+
+                    <option value="head-wound">
+                        Head Wound
+                    </option>
+
+
+                    <!-- =====================================
+                         LEFT ARM
+                         ===================================== -->
+
+                    <option value="left-arm-injury">
+                        Left Arm Injury
+                    </option>
+
+                    <option value="left-arm-wound">
+                        Left Arm Wound
+                    </option>
+
+
+                    <!-- =====================================
+                         LEG
+                         ===================================== -->
+
+                    <option value="leg-injury">
+                        Leg Injury
+                    </option>
+
+                    <option value="leg-wound">
+                        Leg Wound
+                    </option>
+
+
+                    <!-- =====================================
+                         RIGHT ARM
+                         ===================================== -->
+
+                    <option value="right-arm-injury">
+                        Right Arm Injury
+                    </option>
+
+                    <option value="right-arm-wound">
+                        Right Arm Wound
+                    </option>
+
+
+                    <!-- =====================================
+                         TORSO
+                         ===================================== -->
+
+                    <option value="torso-injury">
+                        Torso Injury
+                    </option>
+
+                    <option value="torso-wound">
+                        Torso Wound
+                    </option>
+
+
+                </select>
+
+
+            </div>
+
+
+        </div>
+        <!-- END CHARACTER SHEET -->
+
+
+    </div>
+    <!-- END RESPONSIVE SHEET WRAPPER -->
+
+
+    <!-- =====================================================
+         SHARED CHARACTER STATE
+         ===================================================== -->
+
+    <script src="js/character-state.js"></script>
+
+
+    <script src="js/equipment-data.js"></script>
+
+
+    <!-- =====================================================
+         CHARACTER SHEET JAVASCRIPT
+         ===================================================== -->
+
+    <script src="js/skill-descriptions.js"></script>
+    <script src="js/main-sheet.js"></script>
+
+
+</body>
+
+</html>

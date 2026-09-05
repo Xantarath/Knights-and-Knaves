@@ -1,0 +1,461 @@
+/* =========================================================
+   BUILDER PAGE 1 - PHYSIQUE & GEAR
+   ========================================================= */
+
+
+/* =========================================================
+   GENERAL PAGE
+   ========================================================= */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    min-height: 100%;
+
+    background: #222;
+
+    font-family: serif;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   RESPONSIVE WRAPPER
+   =========================================================
+
+   The artwork is designed at 2048 × 1325.
+
+   JavaScript scales the entire internal sheet as one unit,
+   so all of the absolute coordinates below remain based on
+   the original image.
+   ========================================================= */
+
+.sheet-wrapper {
+    position: relative;
+
+    width: 2048px;
+
+    margin: 0 auto;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   BUILDER SHEET
+   ========================================================= */
+
+.builder-sheet {
+    position: relative;
+
+    width: 2048px;
+    height: 1325px;
+
+    margin: 0;
+
+    transform-origin: top left;
+}
+
+
+/* =========================================================
+   BACKGROUND IMAGE
+   ========================================================= */
+
+.sheet-background {
+    display: block;
+
+    width: 2048px;
+    height: 1325px;
+
+    max-width: none;
+
+    user-select: none;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   GENERAL BUTTON RESET
+   ========================================================= */
+
+.builder-sheet button {
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    outline: none;
+
+    font-family: serif;
+
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+
+/* =========================================================
+   POINT COUNTER
+   ========================================================= */
+
+.points-counter {
+    position: absolute;
+
+    left: 159px;
+    top: 70px;
+
+    width: 220px;
+    height: 184px;
+
+    background: transparent;
+    color: white;
+
+    font-size: 116px;
+    font-weight: regular;
+    line-height: 1;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    z-index: 20;
+}
+
+
+.points-counter:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+
+/* =========================================================
+   SINGLE-SELECT BOXES
+   ========================================================= */
+
+.single-choice {
+    position: absolute;
+
+    width: 46px;
+    height: 46px;
+
+    background: transparent;
+
+    border-radius: 11px;
+
+    cursor: pointer;
+
+    z-index: 10;
+}
+
+.single-choice:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+/*
+   Physique, Height, and Armor are the red-fill boxes.
+*/
+
+.single-choice.selected {
+    background: rgba(190, 0, 0, 0.82);
+}
+
+
+/* =========================================================
+   PHYSIQUE POSITIONS
+   ========================================================= */
+
+.physique-choice:nth-of-type(2)  { left: 38px; top: 354px; }
+.physique-choice:nth-of-type(3)  { left: 38px; top: 416px; }
+.physique-choice:nth-of-type(4)  { left: 38px; top: 478px; }
+.physique-choice:nth-of-type(5)  { left: 38px; top: 541px; }
+.physique-choice:nth-of-type(6)  { left: 38px; top: 603px; }
+.physique-choice:nth-of-type(7)  { left: 38px; top: 666px; }
+.physique-choice:nth-of-type(8)  { left: 38px; top: 728px; }
+.physique-choice:nth-of-type(9)  { left: 38px; top: 789px; }
+.physique-choice:nth-of-type(10) { left: 38px; top: 851px; }
+.physique-choice:nth-of-type(11) { left: 38px; top: 914px; }
+.physique-choice:nth-of-type(12) { left: 38px; top: 976px; }
+
+
+/* =========================================================
+   HEIGHT POSITIONS
+   ========================================================= */
+
+.height-choice:nth-of-type(13) { left: 38px; top: 1119px; }
+.height-choice:nth-of-type(14) { left: 38px; top: 1181px; }
+.height-choice:nth-of-type(15) { left: 38px; top: 1243px; }
+
+
+/* =========================================================
+   ARMOR POSITIONS
+   ========================================================= */
+
+.armor-choice:nth-of-type(16) { left: 548px; top: 90px; }
+.armor-choice:nth-of-type(17) { left: 548px; top: 152px; }
+.armor-choice:nth-of-type(18) { left: 548px; top: 214px; }
+
+
+/* =========================================================
+   QUANTITY BOXES
+   ========================================================= */
+
+.quantity-choice {
+    position: absolute;
+
+    width: 46px;
+    height: 46px;
+
+    background: transparent;
+    color: white;
+
+    border-radius: 11px;
+
+    font-size: 44px;
+    font-weight: regular;
+    line-height: 48px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    user-select: none;
+}
+
+
+/*
+   A faint hover makes the invisible hit-area easier to test
+   while you are fine-tuning coordinates.
+*/
+
+.quantity-choice:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+
+/*
+   When quantity is non-zero, JS adds .has-quantity.
+   The number itself is the selection indicator.
+*/
+
+.quantity-choice.has-quantity {
+    background: rgba(190, 0, 0, 0.82);
+}
+
+/* =========================================================
+   UNAFFORDABLE CHOICES
+   ========================================================= */
+
+.single-choice.unaffordable,
+.quantity-choice.unaffordable {
+    background: rgba(0, 0, 0, 0.58) !important;
+
+    cursor: default !important;
+
+    pointer-events: none;
+}
+
+
+/* Do not allow the normal hover effect through the blackout. */
+
+.single-choice.unaffordable:hover,
+.quantity-choice.unaffordable:hover {
+    background: rgba(0, 0, 0, 0.58) !important;
+}
+
+
+/* =========================================================
+   SHIELD POSITIONS
+   ========================================================= */
+
+.shield-choice:nth-of-type(19) { left: 548px; top: 354px; }
+.shield-choice:nth-of-type(20) { left: 548px; top: 416px; }
+.shield-choice:nth-of-type(21) { left: 548px; top: 478px; }
+.shield-choice:nth-of-type(22) { left: 548px; top: 541px; }
+.shield-choice:nth-of-type(23) { left: 548px; top: 603px; }
+
+
+/* =========================================================
+   SWORD POSITIONS
+   ========================================================= */
+
+.sword-choice:nth-of-type(24) { left: 476px; top: 742px; }
+.sword-choice:nth-of-type(25) { left: 476px; top: 804px; }
+.sword-choice:nth-of-type(26) { left: 476px; top: 866px; }
+.sword-choice:nth-of-type(27) { left: 476px; top: 929px; }
+.sword-choice:nth-of-type(28) { left: 476px; top: 991px; }
+.sword-choice:nth-of-type(29) { left: 476px; top: 1053px; }
+.sword-choice:nth-of-type(30) { left: 476px; top: 1115px; }
+.sword-choice:nth-of-type(31) { left: 476px; top: 1177px; }
+.sword-choice:nth-of-type(32) { left: 476px; top: 1239px; }
+
+
+/* =========================================================
+   BLUDGEON POSITIONS
+   ========================================================= */
+
+.bludgeon-choice:nth-of-type(33) { left: 1054px; top: 91px; }
+.bludgeon-choice:nth-of-type(34) { left: 1054px; top: 153px; }
+.bludgeon-choice:nth-of-type(35) { left: 1054px; top: 214px; }
+.bludgeon-choice:nth-of-type(36) { left: 1054px; top: 277px; }
+.bludgeon-choice:nth-of-type(37) { left: 1054px; top: 340px; }
+.bludgeon-choice:nth-of-type(38) { left: 1054px; top: 401px; }
+
+
+/* =========================================================
+   POLEARM POSITIONS
+   ========================================================= */
+
+.polearm-choice:nth-of-type(39) { left: 1054px; top: 552px; }
+.polearm-choice:nth-of-type(40) { left: 1054px; top: 614px; }
+.polearm-choice:nth-of-type(41) { left: 1054px; top: 675px; }
+.polearm-choice:nth-of-type(42) { left: 1054px; top: 738px; }
+.polearm-choice:nth-of-type(43) { left: 1054px; top: 800px; }
+.polearm-choice:nth-of-type(44) { left: 1054px; top: 862px; }
+.polearm-choice:nth-of-type(45) { left: 1054px; top: 925px; }
+.polearm-choice:nth-of-type(46) { left: 1054px; top: 987px; }
+.polearm-choice:nth-of-type(47) { left: 1054px; top: 1049px; }
+
+
+/* =========================================================
+   AXE POSITIONS
+   ========================================================= */
+
+.axe-choice:nth-of-type(48) { left: 1594px; top: 91px; }
+.axe-choice:nth-of-type(49) { left: 1594px; top: 152px; }
+.axe-choice:nth-of-type(50) { left: 1594px; top: 214px; }
+
+
+/* =========================================================
+   FLAIL POSITIONS
+   ========================================================= */
+
+.flail-choice:nth-of-type(51) { left: 1594px; top: 364px; }
+.flail-choice:nth-of-type(52) { left: 1594px; top: 426px; }
+.flail-choice:nth-of-type(53) { left: 1594px; top: 488px; }
+
+
+/* =========================================================
+   INVALID SELECTION FEEDBACK
+   ========================================================= */
+
+@keyframes rejected-choice {
+    0%   { background: rgba(255, 0, 0, 0.70); }
+    100% { background: transparent; }
+}
+
+
+.choice-rejected {
+    animation: rejected-choice 0.35s ease;
+}
+
+
+/* =========================================================
+   OPTIONAL CAPACITY DEBUGGER
+   ========================================================= */
+
+#capacityDebug {
+    display: none;
+
+    position: absolute;
+
+    left: 157px;
+    top: 260px;
+
+    width: 225px;
+
+    padding: 8px;
+
+    color: white;
+    background: rgba(0, 0, 0, 0.55);
+
+    font-size: 18px;
+
+    z-index: 30;
+}
+
+/* =========================================================
+   SHEET NAVIGATION
+   ========================================================= */
+
+.sheet-nav-button {
+    position: absolute;
+
+    width: 42px;
+    height: 42px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    font-family: serif;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    z-index: 1000;
+}
+
+
+/* ---------------------------------------------------------
+   PREVIOUS SHEET
+   --------------------------------------------------------- */
+
+.previous-sheet-button {
+    left: 2px;
+    top: 2px;
+
+    background: rgba(0, 0, 0, 0.72);
+}
+
+.previous-sheet-button:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+
+/* ---------------------------------------------------------
+   MAIN / BUILDER SWITCH
+   --------------------------------------------------------- */
+
+.mode-nav-button {
+    left: 50%;
+    top: 2px;
+
+    transform: translateX(-50%);
+
+    background: rgba(190, 0, 0, 0.90);
+}
+
+.mode-nav-button:hover {
+    background: rgba(225, 0, 0, 0.95);
+}
+
+
+/* ---------------------------------------------------------
+   NEXT SHEET
+   --------------------------------------------------------- */
+
+.next-sheet-button {
+    right: 2px;
+    top: 2px;
+
+    background: rgba(0, 0, 0, 0.72);
+}
+
+.next-sheet-button:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
