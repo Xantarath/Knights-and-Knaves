@@ -8,11 +8,58 @@ document.addEventListener("DOMContentLoaded", function () {
 
     "use strict";
 
+    const nameField =
+        document.getElementById("name");
+    function loadCharacterName() {
+
+    if (
+        typeof KKState === "undefined" ||
+        !nameField
+    ) {
+        return;
+    }
+
+    const state =
+        KKState.load();
+
+    nameField.value =
+        typeof state?.derived?.characterName === "string"
+            ? state.derived.characterName
+            : "";
+
+}
+
+
+function saveCharacterName() {
+
+    if (
+        typeof KKState === "undefined" ||
+        !nameField
+    ) {
+        return;
+    }
+
+    const state =
+        KKState.load();
+
+    if (
+        !state.derived ||
+        typeof state.derived !== "object"
+    ) {
+        state.derived = {};
+    }
+
+    state.derived.characterName =
+        nameField.value;
+
+    KKState.save(state);
+
+}
 
     // ========================================================
     // GET HTML ELEMENTS
     // ========================================================
-
+    
     const physiqueField =
         document.getElementById("physique");
 
@@ -4795,6 +4842,14 @@ if (
 
 }
 
+    if (nameField) {
+
+    nameField.addEventListener(
+        "input",
+        saveCharacterName
+    );
+
+}
 
     window.addEventListener(
         "resize",
@@ -4811,6 +4866,8 @@ if (
     // ========================================================
     // INITIALIZE
     // ========================================================
+
+    loadCharacterName();
 
     syncBuilderPhysiqueAndHeight();
 
