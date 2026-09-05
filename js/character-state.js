@@ -647,7 +647,7 @@
         try {
 
             const stored =
-                localStorage.getItem(
+                sessionStorage.getItem(
                     STORAGE_KEY
                 );
 
@@ -700,7 +700,7 @@
             );
 
 
-        localStorage.setItem(
+        sessionStorage.setItem(
             STORAGE_KEY,
             JSON.stringify(
                 normalized
