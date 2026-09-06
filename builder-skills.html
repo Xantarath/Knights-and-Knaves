@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Knights & Knaves - Builder: Skills</title>
+
+    <link rel="stylesheet" href="css/builder-skills.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         RESPONSIVE WRAPPER
+         ===================================================== -->
+
+    <div class="sheet-wrapper">
+
+        <div class="builder-sheet" id="builderSheet">
+
+            <!-- =============================================
+     SHEET NAVIGATION
+     ============================================= -->
+
+<a
+    href="builder-gear.html"
+    class="sheet-nav-button previous-sheet-button"
+    aria-label="Previous Builder Sheet"
+    title="Builder Gear"
+>
+    ←
+</a>
+
+<a
+    href="index.html"
+    class="sheet-nav-button mode-nav-button"
+    aria-label="Go to Main Sheet"
+    title="Main Sheet"
+>
+    M
+</a>
+
+<a
+    href="builder-gear.html"
+    class="sheet-nav-button next-sheet-button"
+    aria-label="Next Builder Sheet"
+    title="Builder Gear"
+>
+    →
+</a>
+
+            <img
+                class="sheet-background"
+                src="images/builder-skills.png"
+                alt="Skills Builder"
+            >
+
+
+            <!-- =================================================
+                 ATTRIBUTES
+                 ================================================= -->
+
+            <button
+                type="button"
+                id="awareChoice"
+                class="ranked-choice"
+                data-type="skill"
+                data-key="aware"
+                data-name="AWARE"
+                data-rank-costs="0,1,2,3"
+                aria-label="Aware"
+            ></button>
+
+            <button
+                type="button"
+                id="flexibleChoice"
+                class="toggle-choice"
+                data-type="skill"
+                data-key="flexible"
+                data-name="FLEXIBLE"
+                data-cost="5"
+                aria-label="Flexible"
+            ></button>
+
+            <button
+                type="button"
+                id="resilientChoice"
+                class="toggle-choice"
+                data-type="skill"
+                data-key="resilient"
+                data-name="RESILIENT"
+                data-cost="5"
+                aria-label="Resilient"
+            ></button>
+
+            <button
+                type="button"
+                id="sneakyChoice"
+                class="ranked-choice"
+                data-type="skill"
+                data-key="sneaky"
+                data-name="SNEAKY"
+                data-rank-costs="0,3,6,9,12,15,18"
+                aria-label="Sneaky"
+            ></button>
+
+            <button
+                type="button"
+                id="strongChoice"
+                class="toggle-choice"
+                data-type="skill"
+                data-key="strong"
+                data-name="STRONG"
+                data-cost="5"
+                aria-label="Strong"
+            ></button>
+
+            <button
+                type="button"
+                id="tirelessChoice"
+                class="ranked-choice"
+                data-type="skill"
+                data-key="tireless"
+                data-name="TIRELESS"
+                data-rank-costs="0,3,6,9,12,15"
+                aria-label="Tireless"
+            ></button>
+
+            <button
+                type="button"
+                id="toughChoice"
+                class="toggle-choice"
+                data-type="skill"
+                data-key="tough"
+                data-name="TOUGH"
+                data-cost="3"
+                aria-label="Tough"
+            ></button>
+
+
+            <!-- =================================================
+                 GENERAL
+                 ================================================= -->
+
+            <button
+                type="button"
+                id="abrazareChoice"
+                class="ranked-choice"
+                data-type="skill"
+                data-key="abrazare"
+                data-name="ABRAZARE"
+                data-rank-costs="0,4,8,12,16,20,24,28"
+                aria-label="Abrazare"
+            ></button>
+
+            <button type="button" id="disarmChoice" class="toggle-choice" data-type="skill" data-key="disarm" data-name="DISARM" data-cost="2" aria-label="Disarm"></button>
+
+            <button type="button" id="dualWieldingChoice" class="toggle-choice" data-type="skill" data-key="dual-wielding" data-name="DUAL WIELDING" data-cost="2" aria-label="Dual Wielding"></button>
+
+            <button
+                type="button"
+                id="executionerChoice"
+                class="ranked-choice"
+                data-type="skill"
+                data-key="executioner"
+                data-name="EXECUTIONER"
+                data-rank-costs="0,2,4,7"
+                aria-label="Executioner"
+            ></button>
+
+            <button type="button" id="feintChoice" class="toggle-choice" data-type="skill" data-key="feint" data-name="FEINT" data-cost="3" aria-label="Feint"></button>
+
+            <button type="button" id="gambitChoice" class="toggle-choice" data-type="skill" data-key="gambit" data-name="GAMBIT" data-cost="4" aria-label="Gambit"></button>
+
+            <button type="button" id="lungeChoice" class="toggle-choice" data-type="skill" data-key="lunge" data-name="LUNGE" data-cost="2" aria-label="Lunge"></button>
+
+            <button type="button" id="opportunistChoice" class="toggle-choice" data-type="skill" data-key="opportunist" data-name="OPPORTUNIST" data-cost="2" aria-label="Opportunist"></button>
+
+            <button type="button" id="pickpocketChoice" class="toggle-choice" data-type="skill" data-key="pickpocket" data-name="PICKPOCKET" data-cost="1" aria-label="Pickpocket"></button>
+
+            <button type="button" id="rabatChoice" class="toggle-choice" data-type="skill" data-key="rabat" data-name="RABAT" data-cost="2" aria-label="Rabat"></button>
+
+            <button type="button" id="sweepChoice" class="toggle-choice" data-type="skill" data-key="sweep" data-name="SWEEP" data-cost="5" aria-label="Sweep"></button>
+
+            <button type="button" id="unarmoredChoice" class="toggle-choice" data-type="skill" data-key="unarmored" data-name="UNARMORED" data-cost="4" aria-label="Unarmored"></button>
+
+            <button type="button" id="yankChoice" class="toggle-choice" data-type="skill" data-key="yank" data-name="YANK" data-cost="3" aria-label="Yank"></button>
+
+
+            <!-- =================================================
+                 SHIELDS
+                 ================================================= -->
+
+            <button type="button" id="holdTheLineChoice" class="toggle-choice" data-type="skill" data-key="hold-the-line" data-name="HOLD THE LINE" data-cost="2" aria-label="Hold the Line"></button>
+
+            <button type="button" id="shieldBashChoice" class="toggle-choice" data-type="skill" data-key="shield-bash" data-name="SHIELD BASH" data-cost="3" aria-label="Shield Bash"></button>
+
+            <button type="button" id="swashbucklingChoice" class="toggle-choice" data-type="skill" data-key="swashbuckling" data-name="SWASHBUCKLING" data-cost="1" aria-label="Swashbuckling"></button>
+
+
+            <!-- =================================================
+                 SWORDS
+                 ================================================= -->
+
+            <button type="button" id="assassinChoice" class="toggle-choice" data-type="skill" data-key="assassin" data-name="ASSASSIN" data-cost="3" aria-label="Assassin"></button>
+
+            <button type="button" id="halfSwordingChoice" class="toggle-choice" data-type="skill" data-key="half-swording" data-name="HALF-SWORDING" data-cost="5" aria-label="Half-Swording"></button>
+
+            <button type="button" id="mordschlagChoice" class="toggle-choice" data-type="skill" data-key="mordschlag" data-name="MORDSCHLAG" data-cost="4" aria-label="Mordschlag"></button>
+
+            <button type="button" id="moulinetChoice" class="toggle-choice" data-type="skill" data-key="moulinet" data-name="MOULINET" data-cost="3" aria-label="Moulinet"></button>
+
+            <button type="button" id="riposteChoice" class="toggle-choice" data-type="skill" data-key="riposte" data-name="RIPOSTE" data-cost="3" aria-label="Riposte"></button>
+
+            <button type="button" id="swordAndBoardChoice" class="toggle-choice" data-type="skill" data-key="sword-and-board" data-name="SWORD & BOARD" data-cost="3" aria-label="Sword and Board"></button>
+
+
+            <!-- =================================================
+                 AXES
+                 ================================================= -->
+
+            <button type="button" id="grapplingHookChoice" class="toggle-choice" data-type="skill" data-key="grappling-hook" data-name="GRAPPLING HOOK" data-cost="2" aria-label="Grappling Hook"></button>
+
+            <button type="button" id="haftHackChoice" class="toggle-choice" data-type="skill" data-key="haft-hack" data-name="HAFT HACK" data-cost="4" aria-label="Haft Hack"></button>
+
+            <button type="button" id="weaponHookChoice" class="toggle-choice" data-type="skill" data-key="weapon-hook" data-name="WEAPON HOOK" data-cost="3" aria-label="Weapon Hook"></button>
+
+
+            <!-- =================================================
+     POLEARMS
+     ================================================= -->
+
+<button
+    type="button"
+    id="haftBlockChoice"
+    class="toggle-choice"
+    data-type="skill"
+    data-key="haft-block"
+    data-name="HAFT BLOCK"
+    data-cost="2"
+    aria-label="Haft Block"
+></button>
+
+<button
+    type="button"
+    id="haftStrikeChoice"
+    class="toggle-choice"
+    data-type="skill"
+    data-key="haft-strike"
+    data-name="HAFT STRIKE"
+    data-cost="2"
+    aria-label="Haft Strike"
+></button>
+
+
+<!-- =================================================
+     FLAILS
+     ================================================= -->
+
+<button
+    type="button"
+    id="ensnareChoice"
+    class="toggle-choice"
+    data-type="skill"
+    data-key="ensnare"
+    data-name="ENSNARE"
+    data-cost="3"
+    aria-label="Ensnare"
+></button>
+
+
+<!-- =================================================
+     MODIFICATIONS
+     ================================================= -->
+
+<button
+    type="button"
+    id="centerGripChoice"
+    class="toggle-choice"
+    data-type="modification"
+    data-key="center-grip"
+    data-name="CENTER GRIP"
+    data-cost="0"
+    aria-label="Center Grip"
+></button>
+
+<button
+    type="button"
+    id="cushionedChoice"
+    class="toggle-choice"
+    data-type="modification"
+    data-key="cushioned"
+    data-name="CUSHIONED"
+    data-cost="1"
+    aria-label="Cushioned"
+></button>
+
+<button
+    type="button"
+    id="flangedChoice"
+    class="toggle-choice"
+    data-type="modification"
+    data-key="flanged"
+    data-name="FLANGED"
+    data-cost="1"
+    aria-label="Flanged"
+></button>
+
+<button
+    type="button"
+    id="gigueStrapChoice"
+    class="toggle-choice"
+    data-type="modification"
+    data-key="gigue-strap"
+    data-name="GIGUE STRAP"
+    data-cost="3"
+    aria-label="Gigue Strap"
+></button>
+
+<button
+    type="button"
+    id="reinforcedChoice"
+    class="toggle-choice"
+    data-type="modification"
+    data-key="reinforced"
+    data-name="REINFORCED"
+    data-cost="2"
+    aria-label="Reinforced"
+></button>
+
+<button
+    type="button"
+    id="spikedChoice"
+    class="toggle-choice"
+    data-type="modification"
+    data-key="spiked"
+    data-name="SPIKED"
+    data-cost="1"
+    aria-label="Spiked"
+></button>
+
+<button
+    type="button"
+    id="topSpikeChoice"
+    class="toggle-choice"
+    data-type="modification"
+    data-key="top-spike"
+    data-name="TOP SPIKE"
+    data-cost="1"
+    aria-label="Top Spike"
+></button>
+
+            <!-- =================================================
+     POINT COUNTER
+     ================================================= -->
+
+<button
+    type="button"
+    id="pointsCounter"
+    aria-label="Reset builder"
+></button>
+
+        </div>
+
+    </div>
+
+    <script src="js/reminder-popups.js"></script>
+    <script src="js/character-state.js"></script>
+    <script src="js/skill-descriptions.js"></script>
+    <script src="js/builder-skills.js"></script>
+
+</body>
+</html>

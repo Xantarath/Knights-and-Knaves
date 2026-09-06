@@ -1,0 +1,1708 @@
+/* =========================================================
+   KNIGHTS & KNAVES — GEAR SHEET
+   Updated for gear-sheet(1).png
+   Design size: 2048 × 1325
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE / SCALE WRAPPER
+   ========================================================= */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    min-height: 100%;
+
+    background: #222;
+
+    font-family: serif;
+
+    overflow-x: hidden;
+}
+
+
+.sheet-wrapper {
+    position: relative;
+
+    width: 2048px;
+    height: 1325px;
+
+    margin: 0 auto;
+
+    overflow: hidden;
+}
+
+
+.gear-sheet {
+    position: relative;
+
+    width: 2048px;
+    height: 1325px;
+
+    margin: 0;
+
+    transform-origin: top left;
+}
+
+
+.sheet-background {
+    display: block;
+
+    width: 2048px;
+    height: 1325px;
+
+    max-width: none;
+
+    user-select: none;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   GLOBAL GEAR-SHEET TEXT
+   =========================================================
+   30px is the starting size.  Exact content-aware shrinking
+   requires the small JS helper supplied with this file.
+   ========================================================= */
+
+.gear-sheet,
+.gear-sheet button,
+.gear-sheet select,
+.gear-sheet input,
+.gear-sheet textarea {
+    font-family: serif;
+}
+
+
+.gear-sheet button {
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    outline: none;
+
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+
+.column-name,
+.column-reach,
+.column-weight,
+.column-fixed-stat,
+.block-value,
+.durability-value,
+.location-slot,
+.dynamic-row,
+.pickup-button,
+.armor-display {
+    font-size: 30px;
+}
+
+
+/* =========================================================
+   GENERIC FULL-FIELD BLACKOUT
+   =========================================================
+   Empty / unavailable areas are covered edge-to-edge.
+   ========================================================= */
+
+.gear-column,
+.item-column {
+    position: absolute;
+
+    overflow: hidden;
+
+    color: white;
+
+    z-index: 10;
+}
+
+
+.gear-column::after,
+.item-column::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: inherit;
+
+    background: transparent;
+
+    pointer-events: none;
+
+    transition: background 0.12s ease;
+
+    z-index: 50;
+}
+
+
+.gear-column.empty::after,
+.item-column.empty::after {
+    background: rgba(0, 0, 0, 0.58);
+}
+
+
+.gear-column.empty,
+.item-column.empty {
+    cursor: default;
+}
+
+
+.gear-column.empty.eligible,
+.item-column.empty.eligible {
+    cursor: pointer;
+}
+
+
+.gear-column.empty.eligible:hover::after,
+.item-column.empty.eligible:hover::after {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+
+/* =========================================================
+   STANDARD COLUMN FIELDS
+   ========================================================= */
+
+.column-name,
+.column-reach,
+.column-weight,
+.column-fixed-stat,
+.block-value,
+.durability-value {
+    position: absolute;
+
+    box-sizing: border-box;
+
+    color: white;
+
+    text-align: center;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    line-height: 1;
+
+    z-index: 20;
+}
+
+
+.column-name {
+    cursor: pointer;
+
+    pointer-events: auto;
+
+    white-space: pre-line;
+
+    z-index: 60;
+}
+
+
+.column-name:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+
+.column-reach,
+.column-weight,
+.column-fixed-stat,
+.block-value {
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   PICK UP BUTTONS
+   ========================================================= */
+
+.pickup-button {
+    position: absolute;
+
+    width: 291px;
+    height: 85px;
+
+    box-sizing: border-box;
+
+    background: transparent;
+
+    color: white;
+
+    border-radius: 24px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    z-index: 40;
+
+    overflow: hidden;
+
+    transition:
+        background 0.12s ease,
+        opacity 0.12s ease;
+}
+
+
+.pickup-button:not(.disabled):not(:disabled):hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+
+.pickup-button.disabled,
+.pickup-button:disabled {
+    background: rgba(0, 0, 0, 0.58) !important;
+
+    cursor: default !important;
+
+    opacity: 1 !important;
+}
+
+
+.pickup-button.disabled:hover,
+.pickup-button:disabled:hover {
+    background: rgba(0, 0, 0, 0.58) !important;
+}
+
+
+#leftPickupButton {
+    left: 69px;
+    top: 342px;
+}
+
+
+#rightPickupButton {
+    left: 1692px;
+    top: 342px;
+}
+
+
+/* =========================================================
+   PICK UP DROPDOWNS
+   ========================================================= */
+
+.pickup-select {
+    display: none;
+
+    position: absolute;
+
+    width: 290px;
+    height: 48px;
+
+    box-sizing: border-box;
+
+    background: rgba(30, 30, 30, 0.96);
+
+    color: white;
+
+    border: 1px solid rgba(255, 255, 255, 0.55);
+
+    font-size: 22px;
+
+    z-index: 100;
+
+    -webkit-appearance: auto;
+    appearance: auto;
+}
+
+
+.pickup-select.open {
+    display: block;
+}
+
+
+#leftPickupSelect {
+    left: 70px;
+    top: 425px;
+}
+
+
+#rightPickupSelect {
+    left: 1688px;
+    top: 425px;
+}
+
+
+/* =========================================================
+   CENTRAL LOCATION SLOTS
+   =========================================================
+   The text element remains positioned over the lower value
+   box, while ::before expands over the ENTIRE center section
+   (heading + value area) whenever the slot is empty/inactive.
+   ========================================================= */
+
+.location-slot {
+    position: absolute;
+
+    box-sizing: border-box;
+
+    background: transparent;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border-radius: 11px;
+
+    cursor: pointer;
+
+    z-index: 30;
+
+    /*
+       Must be visible so the full blackout may extend beyond
+       the value textbox into the printed heading area.
+    */
+    overflow: visible;
+
+    white-space: nowrap;
+
+    transition: background 0.12s ease;
+
+    /*
+       Creates a local stacking context so the negative-z
+       blackout stays above the PNG but behind the slot text.
+    */
+    isolation: isolate;
+}
+
+
+/* =========================================================
+   FULL CENTER-SECTION BLACKOUT
+   ========================================================= */
+
+.location-slot::before {
+    content: "";
+
+    position: absolute;
+
+    left: var(--blackout-left, 0px);
+    top: var(--blackout-top, 0px);
+
+    width: var(--blackout-width, 100%);
+    height: var(--blackout-height, 100%);
+
+    box-sizing: border-box;
+
+    background: transparent;
+
+    pointer-events: none;
+
+    z-index: -1;
+
+    transition: background 0.12s ease;
+}
+
+
+/* =========================================================
+   OCCUPIED CENTRAL FIELD
+   ========================================================= */
+
+/*
+   Occupied fields are NOT automatically interactive.
+
+   Only JavaScript locations marked .eligible may highlight.
+*/
+
+.location-slot:not(.empty) {
+    cursor: default;
+}
+
+
+.location-slot:not(.empty).eligible {
+    cursor: pointer;
+}
+
+
+.location-slot:not(.empty).eligible:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+
+/* EMPTY */
+
+.location-slot.empty {
+    background: transparent !important;
+
+    cursor: default;
+}
+
+
+.location-slot.empty::before {
+    background: rgba(0, 0, 0, 0.58);
+}
+
+
+/* ELIGIBLE EMPTY */
+
+.location-slot.empty.eligible {
+    background: transparent !important;
+
+    pointer-events: auto;
+
+    cursor: pointer;
+}
+
+
+.location-slot.empty.eligible:hover {
+    background: transparent !important;
+}
+
+
+.location-slot.empty.eligible:hover::before {
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+
+/* INACTIVE EMPTY */
+
+.location-slot.empty:not(.eligible),
+.location-slot.empty.inactive {
+    background: transparent !important;
+
+    pointer-events: none;
+
+    cursor: default !important;
+}
+
+
+.location-slot.empty:not(.eligible)::before,
+.location-slot.empty.inactive::before {
+    background: rgba(0, 0, 0, 0.58) !important;
+}
+
+
+/* =========================================================
+   LEFT ARM
+   ========================================================= */
+
+#leftHandSlot {
+    left: 580px;
+    top: 228px;
+
+    width: 297px;
+    height: 60px;
+
+    --blackout-left: -11px;
+    --blackout-top: -64px;
+
+    --blackout-width: 309px;
+    --blackout-height: 143px;
+}
+
+
+/* =========================================================
+   RIGHT ARM
+   ========================================================= */
+
+#rightHandSlot {
+    left: 1175px;
+    top: 228px;
+
+    width: 279px;
+    height: 60px;
+
+    --blackout-left: 1px;
+    --blackout-top: -67px;
+
+    --blackout-width: 304px;
+    --blackout-height: 144px;
+}
+
+
+/* =========================================================
+   LEFT SIDEARM
+   ========================================================= */
+
+#leftSidearmSlot {
+    left: 610px;
+    top: 369px;
+
+    width: 267px;
+    height: 60px;
+
+    --blackout-left: -5px;
+    --blackout-top: -63px;
+
+    --blackout-width: 272px;
+    --blackout-height: 142px;
+}
+
+
+/* =========================================================
+   RIGHT SIDEARM
+   ========================================================= */
+
+#rightSidearmSlot {
+    left: 1175px;
+    top: 369px;
+
+    width: 244px;
+    height: 60px;
+
+    --blackout-left: 1px;
+    --blackout-top: -64px;
+
+    --blackout-width: 267px;
+    --blackout-height: 143px;
+}
+
+
+/* =========================================================
+   LEFT GIGUE
+   ========================================================= */
+
+#leftGigueSlot {
+    left: 650px;
+    top: 510px;
+
+    width: 227px;
+    height: 60px;
+
+    --blackout-left: -12px;
+    --blackout-top: -63px;
+
+    --blackout-width: 239px;
+    --blackout-height: 142px;
+}
+
+
+/* =========================================================
+   RIGHT GIGUE
+   ========================================================= */
+
+#rightGigueSlot {
+    left: 1175px;
+    top: 510px;
+
+    width: 210px;
+    height: 60px;
+
+    --blackout-left: 1px;
+    --blackout-top: -63px;
+
+    --blackout-width: 231px;
+    --blackout-height: 142px;
+}
+
+#rightHandSlot::before,
+#rightSidearmSlot::before,
+#rightGigueSlot::before {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    border-top-right-radius: 35px;
+    border-bottom-right-radius: 35px;
+}
+
+#leftHandSlot::before,
+#leftSidearmSlot::before,
+#leftGigueSlot::before {
+    border-top-left-radius: 35px;
+    border-bottom-left-radius: 35px;
+
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* =========================================================
+   CENTER ARMOR AREA — UPDATED PNG
+   ========================================================= */
+
+.armor-display {
+    position: absolute;
+
+    left: 896px;
+
+    width: 262px;
+
+    box-sizing: border-box;
+
+    color: white;
+
+    text-align: center;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 20;
+}
+
+
+/*
+   Armor name occupies the clear upper portion of the
+   large inner Armor box.
+*/
+
+#armorName {
+    top: 214px;
+
+    height: 100px;
+
+    text-transform: capitalize;
+
+    font-size: 120px;
+}
+
+
+/*
+   Durability value sits below the printed DURABILITY label,
+   within the lower portion of the same large inner box.
+*/
+
+#armorDurability {
+    top: 385px;
+
+    height: 87px;
+}
+
+
+/*
+   Padding remains in the large lower inner box.
+*/
+
+#armorPadding {
+    top: 583px;
+
+    height: 205px;
+
+    font-size: 100px;
+}
+
+/* =========================================================
+   ARMOR BLACKOUT SECTIONS
+   =========================================================
+   These sit above the PNG but below the actual Armor text.
+   JavaScript activates them only when no Armor is worn.
+   ========================================================= */
+
+.armor-blackout-section {
+    position: absolute;
+
+    box-sizing: border-box;
+
+    background: transparent;
+
+    pointer-events: none;
+
+    z-index: 15;
+
+    transition: background 0.12s ease;
+}
+
+
+/* =========================================================
+   ARMOR STAT SECTION
+   ========================================================= */
+
+#armorNameSection {
+    left: 877px;
+    top: 50px;
+
+    width: 299px;
+    height: 760px;
+
+    border-radius: 0px;
+}
+
+
+/* =========================================================
+   BLACKED-OUT STATE
+   ========================================================= */
+
+.armor-blackout-section.armor-blackout,
+.armor-blackout-section.armor-empty {
+    background: rgba(0, 0, 0, 0.58);
+}
+
+
+/* =========================================================
+   SIDE DETAIL COLUMNS
+   ========================================================= */
+
+.item-column {
+    color: white;
+
+    z-index: 20;
+
+    pointer-events: none;
+}
+
+
+.item-column .column-name {
+    right: 0;
+    top: 0;
+
+    width: 50%;
+
+    pointer-events: auto;
+}
+
+
+.item-column.empty:not(.eligible) .column-name {
+    pointer-events: none !important;
+
+    cursor: default !important;
+
+    background: transparent !important;
+}
+
+
+.item-column .column-reach,
+.item-column .column-weight,
+.item-column .column-fixed-stat {
+    right: 0;
+
+    width: 50%;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   TALL EQUIPPED COLUMNS
+   ========================================================= */
+
+.tall-column {
+    width: 362px;
+    height: 825px;
+
+    border-radius: 24px;
+}
+
+
+#leftHandColumn {
+    left: 33px;
+    top: 469px;
+}
+
+
+#rightHandColumn {
+    left: 1656px;
+    top: 468px;
+}
+
+
+.tall-column .column-name {
+    height: 10%;
+}
+
+
+.tall-column .column-reach {
+    top: 10%;
+    height: 10%;
+}
+
+
+.tall-column .dynamic-row {
+    height: 10%;
+}
+
+
+.tall-column .dynamic-row[data-row="0"] {
+    top: 20%;
+}
+
+
+.tall-column .dynamic-row[data-row="1"] {
+    top: 30%;
+}
+
+
+.tall-column .dynamic-row[data-row="2"] {
+    top: 40%;
+}
+
+
+.tall-column .dynamic-row[data-row="3"] {
+    top: 50%;
+}
+
+
+.tall-column .dynamic-row[data-row="4"] {
+    top: 60%;
+}
+
+
+.tall-column .dynamic-row[data-row="5"] {
+    top: 70%;
+}
+
+
+.tall-column .dynamic-row[data-row="6"] {
+    top: 80%;
+}
+
+
+.tall-column .column-weight {
+    bottom: 0;
+    height: 10%;
+}
+
+
+/* =========================================================
+   SIDEARM DETAIL COLUMNS
+   ========================================================= */
+
+.sidearm-column {
+    width: 362px;
+    height: 578px;
+
+    border-radius: 24px;
+
+}
+
+
+#leftSidearmColumn {
+    left: 418px;
+    top: 715px;
+}
+
+
+#rightSidearmColumn {
+    left: 1272px;
+    top: 715px;
+}
+
+
+.sidearm-column .column-name {
+    height: 14.285%;
+}
+
+
+.sidearm-column .column-reach {
+    top: 14.285%;
+    height: 14.285%;
+}
+
+
+.sidearm-column .dynamic-row {
+    height: 14.285%;
+}
+
+
+.sidearm-column .dynamic-row[data-row="0"] {
+    top: 28.57%;
+}
+
+
+.sidearm-column .dynamic-row[data-row="1"] {
+    top: 42.855%;
+}
+
+
+.sidearm-column .dynamic-row[data-row="2"] {
+    top: 57.14%;
+}
+
+
+.sidearm-column .dynamic-row[data-row="3"] {
+    top: 71.425%;
+}
+
+
+.sidearm-column .column-weight {
+    bottom: 0;
+    height: 14.285%;
+}
+
+
+/* =========================================================
+   SWASHBUCKLING / BUCKLER COLUMNS
+   ========================================================= */
+
+.buckler-column {
+    width: 449px;
+    height: 249px;
+
+    border-radius: 24px;
+}
+
+
+#leftBucklerColumn {
+    left: 33px;
+    top: 49px;
+}
+
+
+#rightBucklerColumn {
+    left: 1570px;
+    top: 49px;
+}
+
+
+.buckler-column .column-name {
+    height: 33.333%;
+}
+
+
+.buckler-column .column-reach {
+    top: 33.333%;
+    height: 33.333%;
+}
+
+
+.buckler-column .column-fixed-stat {
+    right: 0;
+    top: 66.666%;
+
+    width: 50%;
+    height: 33.333%;
+}
+
+
+.buckler-column.empty {
+    pointer-events: none;
+}
+
+
+.buckler-column.empty.eligible {
+    pointer-events: auto;
+
+    cursor: pointer;
+}
+
+
+.buckler-column.empty .column-name {
+    pointer-events: none !important;
+}
+
+
+.buckler-column:not(.empty) {
+    pointer-events: auto;
+
+    cursor: pointer;
+}
+
+
+.buckler-column:not(.empty) .column-name {
+    pointer-events: auto;
+
+    cursor: pointer;
+
+    z-index: 90;
+}
+
+
+/* =========================================================
+   CENTER GIGUE SHIELD DETAIL COLUMN
+   =========================================================
+   New PNG rows:
+       NAME
+       REACH
+       BLOCK
+       INTEGRITY
+       WEIGHT
+   ========================================================= */
+
+.shield-column {
+    left: 800px;
+    top: 879px;
+
+    width: 449px;
+    height: 414px;
+
+    border-radius: 24px;
+}
+
+
+.shield-column .column-name {
+    right: 0;
+    top: 0;
+
+    width: 50%;
+    height: 20%;
+}
+
+
+.shield-column .column-reach {
+    right: 0;
+    top: 20%;
+
+    width: 50%;
+    height: 20%;
+}
+
+
+.shield-column .block-value,
+.shield-column .column-fixed-stat {
+    right: 0;
+    top: 40%;
+
+    width: 50%;
+    height: 20%;
+}
+
+
+.shield-column .durability-value {
+    right: 0;
+    top: 60%;
+
+    width: 50%;
+    height: 20%;
+}
+
+
+.shield-column .column-weight {
+    right: 0;
+    bottom: 0;
+
+    width: 50%;
+    height: 20%;
+}
+
+
+/* =========================================================
+   GIGUE INTEGRITY CONTROL
+   ========================================================= */
+
+#gigueShieldColumn .durability-value {
+    pointer-events: auto;
+
+    background: transparent;
+
+    color: white;
+
+    padding: 0;
+
+    overflow: hidden;
+}
+
+
+/* ---------------------------------------------------------
+   Make the +/- Integrity control fill the entire Gigue
+   Integrity field and arrange its contents left-to-right.
+   --------------------------------------------------------- */
+
+#gigueShieldColumn .durability-value .durability-control {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0;
+    margin: 0;
+
+    background: transparent;
+
+    pointer-events: auto;
+}
+
+
+/* ---------------------------------------------------------
+   MINUS / PLUS
+   --------------------------------------------------------- */
+
+#gigueShieldColumn .durability-value .durability-button {
+    width: 30%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+    color: white;
+
+    font-family: serif;
+    font-size: 30px !important;
+    line-height: 1;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+}
+
+
+/* ---------------------------------------------------------
+   INTEGRITY NUMBER
+   --------------------------------------------------------- */
+
+#gigueShieldColumn .durability-value .durability-number {
+    width: 40%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+    padding: 0;
+
+    color: white;
+
+    font-family: serif;
+    font-size: 30px !important;
+    line-height: 1;
+
+    text-align: center;
+
+    pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   BUTTON HOVER
+   --------------------------------------------------------- */
+
+#gigueShieldColumn .durability-value .durability-button:hover {
+    background: rgba(255, 255, 255, 0.10);
+}
+
+
+/* =========================================================
+   DYNAMIC STAT ROWS
+   ========================================================= */
+
+.dynamic-row {
+    position: absolute;
+
+    left: 0;
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    box-sizing: border-box;
+
+    color: white;
+
+    pointer-events: none;
+
+    z-index: 20;
+
+    overflow: hidden;
+}
+
+
+.dynamic-name,
+.dynamic-value {
+    position: absolute;
+
+    top: 0;
+
+    height: 100%;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    overflow: hidden;
+}
+
+
+.dynamic-name {
+    left: 0 !important;
+    right: auto !important;
+
+    width: 50% !important;
+}
+
+
+.dynamic-value {
+    left: 50% !important;
+    right: auto !important;
+
+    width: 50% !important;
+}
+
+
+/* DEFENSE — BLUE */
+
+.dynamic-row.defense .dynamic-name,
+.dynamic-row.defense .dynamic-value {
+    background: rgba(50, 120, 220, 0.32);
+}
+
+
+/* STRIKE — RED */
+
+.dynamic-row.strike .dynamic-name,
+.dynamic-row.strike .dynamic-value {
+    background: rgba(210, 55, 55, 0.32);
+}
+
+
+/* TOOL — GREEN */
+
+.dynamic-row.tool .dynamic-name,
+.dynamic-row.tool .dynamic-value {
+    background: rgba(55, 170, 80, 0.32);
+}
+
+
+/* DURABILITY / INTEGRITY — UNSHADED */
+
+.dynamic-row.durability {
+    pointer-events: auto;
+}
+
+
+.dynamic-row.durability .dynamic-name,
+.dynamic-row.durability .dynamic-value {
+    background: transparent !important;
+}
+
+
+.dynamic-row.durability .dynamic-name {
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   DURABILITY +/- CONTROL
+   ========================================================= */
+
+.dynamic-row.durability .durability-control {
+    left: 50% !important;
+    right: auto !important;
+    top: 0;
+
+    width: 50% !important;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    background: transparent !important;
+
+    pointer-events: auto;
+
+    z-index: 80;
+}
+
+
+.durability-button {
+    width: 30%;
+    height: 100%;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+}
+
+
+.durability-button:hover {
+    background: rgba(255, 255, 255, 0.10);
+}
+
+
+.durability-number {
+    width: 40%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    font-size: 30px;
+
+    text-align: center;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   INVALID ACTION FEEDBACK
+   ========================================================= */
+
+@keyframes rejected-action {
+
+    0% {
+        background: rgba(255, 0, 0, 0.70);
+    }
+
+    100% {
+        background: transparent;
+    }
+
+}
+
+
+.choice-rejected {
+    animation:
+        rejected-action
+        0.35s
+        ease;
+}
+
+
+/* =========================================================
+   FINAL POINTER-EVENT / BLACKOUT OVERRIDES
+   ========================================================= */
+
+.item-column.empty:not(.eligible) {
+    pointer-events: none;
+}
+
+
+.item-column.empty.eligible {
+    pointer-events: auto;
+
+    cursor: pointer;
+}
+
+
+#leftBucklerColumn:not(.empty),
+#rightBucklerColumn:not(.empty),
+#leftBucklerColumn.empty.eligible,
+#rightBucklerColumn.empty.eligible {
+    pointer-events: auto !important;
+}
+
+
+/* Ensure every blackout spans the complete registered field. */
+
+.gear-column.empty::after,
+.item-column.empty::after {
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+
+    width: auto !important;
+    height: auto !important;
+}
+
+
+/* =========================================================
+   FINAL UI OVERRIDES — COLUMN NAMES, BLOCK, INTEGRITY
+   ========================================================= */
+
+.column-name,
+.item-column .column-name,
+.buckler-column .column-name,
+.shield-column .column-name {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: white !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.column-name:hover,
+.item-column .column-name:hover,
+.buckler-column .column-name:hover,
+.shield-column .column-name:hover {
+    background: rgba(255, 255, 255, 0.07) !important;
+}
+
+/* Shield Integrity is unshaded. */
+#gigueShieldColumn .durability-value,
+#gigueShieldColumn [data-field="durability"],
+#gigueShieldColumn [data-field="integrity"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: white !important;
+    box-shadow: none !important;
+}
+
+/* 30px starting size; Part 12 JS shrinks overflowing text. */
+.column-name,
+.column-reach,
+.column-weight,
+.column-fixed-stat,
+.block-value,
+.durability-value,
+.location-slot,
+.dynamic-row,
+.dynamic-name,
+.dynamic-value,
+.durability-number,
+.pickup-button,
+.armor-display {
+    font-size: 30px;
+}
+
+.column-weight:not(:empty) {
+    cursor: pointer;
+}
+
+.column-weight:not(:empty):hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* =========================================================
+   CLICKABLE EQUIPMENT WEIGHT
+   ========================================================= */
+
+#leftHandColumn:not(.empty) .column-weight,
+#rightHandColumn:not(.empty) .column-weight,
+#leftSidearmColumn:not(.empty) .column-weight,
+#rightSidearmColumn:not(.empty) .column-weight {
+    pointer-events: auto !important;
+    cursor: pointer;
+    z-index: 70;
+}
+
+#leftHandColumn:not(.empty) .column-weight:hover,
+#rightHandColumn:not(.empty) .column-weight:hover,
+#leftSidearmColumn:not(.empty) .column-weight:hover,
+#rightSidearmColumn:not(.empty) .column-weight:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+#gigueShieldColumn .column-weight {
+    pointer-events: none !important;
+    cursor: default;
+}
+
+/* =========================================================
+   INJURY-AFFECTED EQUIPMENT VALUES
+   ========================================================= */
+
+.dynamic-value.injury-affected {
+    color: #ffaaaa !important;
+}
+
+/* =========================================================
+   ARM WOUNDS
+   ========================================================= */
+
+#leftHandSlot.arm-wounded,
+#rightHandSlot.arm-wounded {
+    pointer-events: none !important;
+    cursor: default !important;
+    background: transparent !important;
+}
+
+
+#leftHandSlot.arm-wounded::before,
+#rightHandSlot.arm-wounded::before {
+    background: rgba(190, 0, 0, 0.62) !important;
+    pointer-events: none !important;
+}
+
+/* =========================================================
+   SHEET NAVIGATION
+   ========================================================= */
+
+.sheet-nav-button {
+    position: absolute;
+
+    width: 42px;
+    height: 42px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    font-family: serif;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    z-index: 1000;
+}
+
+
+/* ---------------------------------------------------------
+   PREVIOUS SHEET
+   --------------------------------------------------------- */
+
+.previous-sheet-button {
+    left: 2px;
+    top: 2px;
+
+    background: rgba(0, 0, 0, 0.72);
+}
+
+.previous-sheet-button:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+
+/* ---------------------------------------------------------
+   MAIN / BUILDER SWITCH
+   --------------------------------------------------------- */
+
+.mode-nav-button {
+    left: 50%;
+    top: 2px;
+
+    transform: translateX(-50%);
+
+    background: rgba(190, 0, 0, 0.90);
+}
+
+.mode-nav-button:hover {
+    background: rgba(225, 0, 0, 0.95);
+}
+
+
+/* ---------------------------------------------------------
+   NEXT SHEET
+   --------------------------------------------------------- */
+
+.next-sheet-button {
+    right: 2px;
+    top: 2px;
+
+    background: rgba(0, 0, 0, 0.72);
+}
+
+.next-sheet-button:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+/* =========================================================
+   SKILL REMINDERS
+   ========================================================= */
+
+.skill-reminder {
+    color: #9ecfff !important;
+    margin-left: 12px;
+
+    .skill-added-value {
+    color: #9ecfff !important;
+}
+}
+
+/* =========================================================
+   HALF-SWORDING
+   ========================================================= */
+
+.dynamic-value.half-swording-value {
+    font-size: 22px !important;
+    white-space: nowrap;
+}
+
+.dynamic-value.half-swording-value .half-swording-reminder {
+    display: inline;
+    flex: none;
+
+    margin-left: 8px;
+
+    color: #9ecfff !important;
+    font-size: inherit !important;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   SWORD & BOARD
+   ========================================================= */
+
+.sword-and-board-reminder {
+    color: #9ecfff !important;
+    margin-left: 8px;
+    white-space: nowrap;
+    flex: none;
+}
+
+/* =========================================================
+   HAFT BLOCK
+   ========================================================= */
+
+.haft-block-reminder {
+    color: #9ecfff !important;
+    margin-right: 8px;
+    white-space: nowrap;
+}
+
+/* =========================================================
+   HEAD TRAUMA TINT
+   ========================================================= */
+
+.gear-sheet.head-trauma-tint::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(99, 0, 13, 0.5);
+
+    pointer-events: none;
+
+    z-index: 9999;
+}
+
+
+/* =========================================================
+   TWO-HANDED WEAPON MARKER
+   ========================================================= */
+
+.column-name {
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+
+.two-handed-name-marker {
+    display: block;
+
+    flex-basis: 100%;
+    width: 100%;
+
+    color: white;
+
+    text-align: center;
+}
