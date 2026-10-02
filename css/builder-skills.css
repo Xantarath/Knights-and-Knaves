@@ -1,0 +1,734 @@
+/* =========================================================
+   BUILDER PAGE 2 - SKILLS
+   ========================================================= */
+
+
+/* =========================================================
+   GENERAL PAGE
+   ========================================================= */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    min-height: 100%;
+
+    background: #222;
+
+    font-family: serif;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   RESPONSIVE WRAPPER
+   ========================================================= */
+
+.sheet-wrapper {
+    position: relative;
+
+    width: 2048px;
+
+    margin: 0 auto;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   BUILDER SHEET
+   ========================================================= */
+
+.builder-sheet {
+    position: relative;
+
+    width: 2048px;
+    height: 1325px;
+
+    margin: 0;
+
+    transform-origin: top left;
+}
+
+
+/* =========================================================
+   BACKGROUND IMAGE
+   ========================================================= */
+
+.sheet-background {
+    display: block;
+
+    width: 2048px;
+    height: 1325px;
+
+    max-width: none;
+
+    user-select: none;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   GENERAL BUTTON RESET
+   ========================================================= */
+
+.builder-sheet button {
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    outline: none;
+
+    font-family: serif;
+
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+
+/* =========================================================
+   TOGGLE BOXES
+   ========================================================= */
+
+.toggle-choice {
+    position: absolute;
+
+    width: 46px;
+    height: 46px;
+
+    background: transparent;
+
+    border-radius: 11px;
+
+    cursor: pointer;
+
+    z-index: 10;
+}
+
+
+.toggle-choice:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+
+.toggle-choice.selected {
+    background: rgba(190, 0, 0, 0.82);
+}
+
+
+/* =========================================================
+   RANKED BOXES
+   ========================================================= */
+
+.ranked-choice {
+    position: absolute;
+
+    width: 46px;
+    height: 46px;
+
+    background: transparent;
+    color: white;
+
+    border-radius: 11px;
+
+    font-size: 44px;
+    font-weight: regular;
+    line-height: 48px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    user-select: none;
+}
+
+
+.ranked-choice:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+
+.ranked-choice.has-rank {
+    background: rgba(190, 0, 0, 0.82);
+}
+
+
+/* =========================================================
+   ATTRIBUTE POSITIONS
+   ========================================================= */
+
+#awareChoice {
+    left: 21px;
+    top: 365px;
+}
+
+
+#flexibleChoice {
+    left: 21px;
+    top: 427px;
+}
+
+
+#resilientChoice {
+    left: 21px;
+    top: 489px;
+}
+
+
+#sneakyChoice {
+    left: 21px;
+    top: 552px;
+}
+
+
+#strongChoice {
+    left: 21px;
+    top: 614px;
+}
+
+
+#tirelessChoice {
+    left: 21px;
+    top: 675px;
+}
+
+
+#toughChoice {
+    left: 21px;
+    top: 738px;
+}
+
+
+/* =========================================================
+   GENERAL POSITIONS
+   ========================================================= */
+
+#abrazareChoice {
+    left: 455px;
+    top: 96px;
+}
+
+
+#disarmChoice {
+    left: 455px;
+    top: 158px;
+}
+
+
+#dualWieldingChoice {
+    left: 455px;
+    top: 220px;
+}
+
+
+#executionerChoice {
+    left: 455px;
+    top: 283px;
+}
+
+
+#feintChoice {
+    left: 455px;
+    top: 345px;
+}
+
+
+#gambitChoice {
+    left: 455px;
+    top: 406px;
+}
+
+
+#hesitateChoice {
+    left: 455px;
+    top: 469px;
+}
+
+
+#lungeChoice {
+    left: 455px;
+    top: 531px;
+}
+
+
+#opportunistChoice {
+    left: 455px;
+    top: 593px;
+}
+
+
+#pickpocketChoice {
+    left: 455px;
+    top: 658px;
+}
+
+
+#prendeLeTourChoice {
+    left: 455px;
+    top: 720px;
+}
+
+
+#rabatChoice {
+    left: 455px;
+    top: 782px;
+}
+
+
+#sweepChoice {
+    left: 456px;
+    top: 844px;
+}
+
+
+#tackleChoice {
+    left: 457px;
+    top: 907px;
+}
+
+
+#yankChoice {
+    left: 457px;
+    top: 971px;
+}
+
+
+/* =========================================================
+   SHIELD SKILL POSITIONS
+   ========================================================= */
+
+#holdTheLineChoice {
+    left: 455px;
+    top: 1122px;
+}
+
+
+#shieldBashChoice {
+    left: 455px;
+    top: 1184px;
+}
+
+
+#swashbucklingChoice {
+    left: 455px;
+    top: 1245px;
+}
+
+
+/* =========================================================
+   SWORD SKILL POSITIONS
+   ========================================================= */
+
+#assassinChoice {
+    left: 1018px;
+    top: 96px;
+}
+
+
+#halfSwordingChoice {
+    left: 1018px;
+    top: 158px;
+}
+
+
+#mordschlagChoice {
+    left: 1018px;
+    top: 220px;
+}
+
+
+#moulinetChoice {
+    left: 1018px;
+    top: 283px;
+}
+
+
+#riposteChoice {
+    left: 1018px;
+    top: 345px;
+}
+
+
+#swordAndBoardChoice {
+    left: 1018px;
+    top: 407px;
+}
+
+
+/* =========================================================
+   AXE SKILL POSITIONS
+   ========================================================= */
+
+#grapplingHookChoice {
+    left: 1017px;
+    top: 557px;
+}
+
+
+#haftHackChoice {
+    left: 1017px;
+    top: 619px;
+}
+
+
+#weaponHookChoice {
+    left: 1017px;
+    top: 681px;
+}
+
+
+/* =========================================================
+   POLEARM SKILL POSITIONS
+   ========================================================= */
+
+#haftBlockChoice {
+    left: 1016px;
+    top: 829px;
+}
+
+
+#haftStrikeChoice {
+    left: 1016px;
+    top: 891px;
+}
+
+
+/* =========================================================
+   FLAIL SKILL POSITIONS
+   ========================================================= */
+
+#ensnareChoice {
+    left: 1014px;
+    top: 1038px;
+}
+
+
+/* =========================================================
+   MODIFICATION POSITIONS
+   ========================================================= */
+
+#centerGripChoice {
+    left: 1576px;
+    top: 94px;
+}
+
+
+#cushionedChoice {
+    left: 1576px;
+    top: 156px;
+}
+
+
+#flangedChoice {
+    left: 1577px;
+    top: 218px;
+}
+
+
+#gigueStrapChoice {
+    left: 1576px;
+    top: 279px;
+}
+
+
+#reinforcedChoice {
+    left: 1576px;
+    top: 342px;
+}
+
+
+#spikedChoice {
+    left: 1576px;
+    top: 404px;
+}
+
+
+#topSpikeChoice {
+    left: 1576px;
+    top: 466px;
+}
+
+
+/* =========================================================
+   INVALID SELECTION FEEDBACK
+   ========================================================= */
+
+@keyframes rejected-choice {
+    0% {
+        background: rgba(255, 0, 0, 0.70);
+    }
+
+    100% {
+        background: transparent;
+    }
+}
+
+
+.choice-rejected {
+    animation: rejected-choice 0.35s ease;
+}
+
+
+/* =========================================================
+   UNAFFORDABLE CHOICES
+   ========================================================= */
+
+.toggle-choice.unaffordable,
+.ranked-choice.unaffordable {
+    background: rgba(0, 0, 0, 0.58) !important;
+
+    cursor: default !important;
+
+    pointer-events: auto;
+}
+
+
+.toggle-choice.unaffordable:hover,
+.ranked-choice.unaffordable:hover {
+    background: rgba(0, 0, 0, 0.58) !important;
+}
+
+
+/* =========================================================
+   POINT COUNTER
+   ========================================================= */
+
+#pointsCounter {
+    position: absolute;
+
+    left: 109px;
+    top: 62px;
+
+    width: 220px;
+    height: 180px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+    padding: 0;
+
+    background: transparent;
+    color: white;
+
+    border: none;
+    outline: none;
+
+    font-family: serif;
+    font-size: 116px;
+    font-weight: regular;
+    line-height: 1;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    z-index: 20;
+
+    user-select: none;
+
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+
+#pointsCounter:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+
+/* =========================================================
+   SHEET NAVIGATION
+   ========================================================= */
+
+.sheet-nav-button {
+    position: absolute;
+
+    width: 42px;
+    height: 42px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    font-family: serif;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    z-index: 1000;
+}
+
+
+/* ---------------------------------------------------------
+   PREVIOUS SHEET
+   --------------------------------------------------------- */
+
+.previous-sheet-button {
+    left: 2px;
+    top: 2px;
+
+    background: rgba(0, 0, 0, 0.72);
+}
+
+
+.previous-sheet-button:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+
+/* ---------------------------------------------------------
+   MAIN / BUILDER SWITCH
+   --------------------------------------------------------- */
+
+.mode-nav-button {
+    left: 50%;
+    top: 2px;
+
+    transform: translateX(-50%);
+
+    background: rgba(190, 0, 0, 0.90);
+}
+
+
+.mode-nav-button:hover {
+    background: rgba(225, 0, 0, 0.95);
+}
+
+
+/* ---------------------------------------------------------
+   NEXT SHEET
+   --------------------------------------------------------- */
+
+.next-sheet-button {
+    right: 2px;
+    top: 2px;
+
+    background: rgba(0, 0, 0, 0.72);
+}
+
+
+.next-sheet-button:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+
+/* =========================================================
+   PRINTED SKILL-NAME REMINDER AREAS
+   ========================================================= */
+
+.skill-reminder-trigger {
+    position: absolute;
+
+    width: 330px;
+
+    padding: 0;
+
+    background: transparent;
+    border: none;
+
+    cursor: pointer;
+
+    z-index: 15;
+}
+
+
+/*
+   Enable this temporarily if you need to see and adjust
+   the reminder areas.
+*/
+
+/*
+.skill-reminder-trigger {
+    background: rgba(0, 100, 255, 0.20);
+}
+*/
+
+
+.skill-reminder-trigger:focus-visible {
+    outline: 2px solid #9ecfff;
+    outline-offset: 1px;
+}
+
+
+.reminder-popup {
+    position: fixed;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: min(520px, calc(100vw - 40px));
+    max-height: calc(100vh - 40px);
+
+    padding: 18px 22px;
+
+    overflow-y: auto;
+
+    color: white;
+    background: rgba(15, 15, 15, 0.96);
+
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+
+    box-sizing: border-box;
+
+    font-family: serif;
+    font-size: 18px;
+    line-height: 1.35;
+
+    z-index: 10000;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.75);
+}
+
+
+.reminder-popup-title {
+    margin-bottom: 10px;
+
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+.reminder-popup-body {
+    white-space: pre-wrap;
+}
+
+
+/* =========================================================
+   MODIFICATION ASSIGNMENT COUNTS
+   ========================================================= */
+
+.toggle-choice[data-type="modification"] {
+    color: white !important;
+
+    font-family: serif;
+    font-size: 42px;
+    font-weight: regular;
+    line-height: 48px;
+
+    text-align: center;
+}
